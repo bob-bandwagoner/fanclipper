@@ -1,0 +1,9 @@
+{
+    "manifest_version": 3,
+    "name": "fanclipper",
+    "description": "ファンが楽しい瞬間をシェアするのを助けるChrome拡張です",
+    "version": "0.1",
+    "action": {
+        "default_popup": "popup/popup.html"
+    }
+}
