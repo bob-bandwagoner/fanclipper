@@ -1,14 +1,24 @@
-let Tab =  {"Title": "", "URL": ""};
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    console.log("message received");
+    if (request.image) {
+        // 画像データを受け取って表示
+        const imgElement = document.getElementById('screenshotImage');
+        imgElement.src = request.image;
+    }
+});
+
+let Tab = { "Title": "", "URL": "" };
 
 chrome.tabs.query({
     active: true,
     lastFocusedWindow: true
-}, function(tabs) {
+}, function (tabs) {
     var tab = tabs[0];
     Tab.Title = tab.title;
     Tab.URL = tab.url;
     console.log(`Title: ${Tab.Title}`);
     console.log(`URL: ${Tab.URL}`);
+    chrome.tabs.sendMessage(tab.id, { action: "takeScreenshot" });
 });
 
 document.getElementById('tweetButton').addEventListener('click', async function () {
